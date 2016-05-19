@@ -28,7 +28,7 @@ string getPlayerInput(string prompt) {
 	return input;
 }
 
-// Базовый класс
+
 class Command
 {
 public:
@@ -75,7 +75,6 @@ class MakeMoveCommand : public Command
 public:
 	MakeMoveCommand(Game * p) : Command(p) {}
 	void execute() {
-		// Сохраним игру для возможного последующего отката
 		pgame->save("TEMP_FILE");
 		string move;
 		move = getPlayerInput("Enter your move:");
@@ -88,7 +87,6 @@ class UndoCommand : public Command
 public:
 	UndoCommand(Game * p) : Command(p) {}
 	void execute() {
-		// Восстановим игру из временного файла
 		pgame->open("TEMP_FILE");
 	}
 };
@@ -97,16 +95,11 @@ public:
 int main()
 {
 	Game game;
-	// Имитация действий игрока
 	vector<Command*> v;
-	// Создаем новую игру 
 	v.push_back(new CreateGameCommand(&game));
-	// Делаем несколько ходов
 	v.push_back(new MakeMoveCommand(&game));
 	v.push_back(new MakeMoveCommand(&game));
-	// Последний ход отменяем
 	v.push_back(new UndoCommand(&game));
-	// Сохраняем игру
 	v.push_back(new SaveGameCommand(&game));
 
 	for (size_t i = 0; i<v.size(); ++i)
