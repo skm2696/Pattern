@@ -3,7 +3,7 @@
 #include <string>
 using namespace std;
 
-// Иерархия классов, определяющая алгоритмы сжатия файлов
+
 class Compression
 {
 public:
@@ -35,8 +35,6 @@ public:
 	}
 };
 
-
-// Класс для использования
 class Compressor
 {
 public:
